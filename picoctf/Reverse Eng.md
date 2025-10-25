@@ -283,6 +283,7 @@ root@DESKTOP-9PHI4CM:~# python3
 90
 ```
 <img width="1920" height="1029" alt="Image" src="https://github.com/user-attachments/assets/dc1ac4b5-3318-4540-9432-7094cb6dc034" />
+<img width="1920" height="1032" alt="Image" src="https://github.com/user-attachments/assets/55141cb8-d799-4335-a444-ec715a235230" />
 
 ## Flag:
 ```
