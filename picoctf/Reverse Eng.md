@@ -281,7 +281,7 @@ root@DESKTOP-9PHI4CM:/mnt/d/user/ghidra_11.0.3_PUBLIC# cd
 root@DESKTOP-9PHI4CM:~# python3
 >>> int(0x5a)
 90
-
+<img width="1920" height="1029" alt="Image" src="https://github.com/user-attachments/assets/dc1ac4b5-3318-4540-9432-7094cb6dc034" />
 ```
 ## Flag:
 ```
