@@ -30,7 +30,7 @@ picoCTF{h1dd3n_1n_pLa1n_51GHT_18375919}
 ## Concepts Learnt:
 I learned some basic introductory stuff about forensics, how to use wireshark and steghide.
 ## Notes:
-I initially started viewing the metadata of the files, which was the wrong tangent.
+I initially started viewing the metadata of the files, which was the wrong tangent. The hint then tells us to explore all the ways of hiding data so i started doing steganography
 ## Resources:
 https://trailofbits.github.io/ctf/forensics/index.html
 https://github.com/HHousen/PicoCTF-2021/tree/master/Forensics/Trivial%20Flag%20Transfer%20Protocol
@@ -40,5 +40,6 @@ https://gchq.github.io/CyberChef/#recipe=ROT13(true,true,false,13)&input=VkhGUlF
 
 # 2. tunn3l v1s10n
 > Description:
+> We found this file. Recover the flag.
 
 
