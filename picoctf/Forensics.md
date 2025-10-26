@@ -54,6 +54,7 @@ After analysis we find out that the audio contains SSTV (Slow-Scan TV) signals a
 We use the "Scottie 1" RX option to decode it and play the audio file. After the audio has finished, we get an image which contains the flag in plain text form (upside down).
 
 <img width="829" height="531" alt="Image" src="https://github.com/user-attachments/assets/d64cdb60-08b6-47c5-a725-d11bf7380ef3" />
+
 ## Flag:
 ```
 picoCTF{beep_boop_im_in_Space}
