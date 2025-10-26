@@ -42,6 +42,8 @@ https://gchq.github.io/CyberChef/#recipe=ROT13(true,true,false,13)&input=VkhGUlF
 > We found this file. Recover the flag.
 ## Solution:
 
+***
+
 # 3. Moonwalk
 > Description:
 > Decode this message from the moon.
@@ -49,7 +51,22 @@ https://gchq.github.io/CyberChef/#recipe=ROT13(true,true,false,13)&input=VkhGUlF
 First we open the audio file in Audacity and enable "Spectogram view" instead of "Waveform view" to analyse it properly.
 <img width="1920" height="1028" alt="Image" src="https://github.com/user-attachments/assets/9e00b3f7-6526-4ece-af8a-9d65ea024a84" />
 After analysis we find out that the audio contains SSTV (Slow-Scan TV) signals and we decode these signals using "RX-SSTV".
-We use the "Scottie 1" RX option to decode it and play the audio file. After the audio has finished, we get an image which contains the flag in plain text form.
+We use the "Scottie 1" RX option to decode it and play the audio file. After the audio has finished, we get an image which contains the flag in plain text form (upside down).
+<img width="829" height="531" alt="Image" src="https://github.com/user-attachments/assets/d64cdb60-08b6-47c5-a725-d11bf7380ef3" />
+## Flag:
+```
+picoCTF{beep_boop_im_in_Space}
+```
+## Concepts Learnt:
+I learnt some more features of Audacity and how to use them (eg: spectogram view), I also learnt a little about audio files and radio signals (eg: SSTV, RX options). I learnt a little about the Apollo 11 space mission too (eg: The Apollo TV cameras used a low-resolution, black-and-white system that converted the image into a radio signal, which was then received by large antennas on Earth.)
+## Notes:
+I initially uploaded the audio file into a "morse code decrypter", which was a wrong tangent.
+Even after uploading it on Audacity, I first compressed it, after not finding anything, I tried importing raw data but that was another wrong tangent.
+## Resources:
+https://athletics.cmu.edu/athletics/mascot/index#:~:text=Although%20students%20have%20dressed%20as,as%20the%20university's%20first%20mascot.
+https://en.wikipedia.org/wiki/Apollo_TV_camera
+
+***
 
 
 
