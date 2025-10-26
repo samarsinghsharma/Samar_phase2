@@ -42,5 +42,12 @@ https://gchq.github.io/CyberChef/#recipe=ROT13(true,true,false,13)&input=VkhGUlF
 > We found this file. Recover the flag.
 ## Solution:
 
+# 3. Moonwalk
+> Description:
+> Decode this message from the moon.
+## Solution:
+First we open the audio file in Audacity and enable "Spectogram view" instead of "Waveform view" to analyse it properly.
+
+
 
 
