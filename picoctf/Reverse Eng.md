@@ -296,4 +296,17 @@ https://www.youtube.com/watch?v=gh2RXE9BIN8
 
 ***
 
-# 3. 
+# 3. vault door 3
+> Description:
+> This vault uses for-loops and byte arrays. The source code for this vault is here: VaultDoor3.java
+## Solution:
+First we analyse the source code which is in java. We figure out that this code is just rearranging the characters of a main string which is also provided in the code "jU5t_a_sna_3lpm18gb41_u_4_mfr340". We rearrange the string by storing its characters in another string/array "buffer" according to the given java code.
+After this, we get buffer=[jU5t_a_s1mpl3_an4gr4m_4_u_1fb380], which is the password for the vault.
+## Flag:
+```
+picoCTF{jU5t_a_s1mpl3_an4gr4m_4_u_1fb380}
+```
+## Concepts Learnt:
+I learnt some basic syntax of java, different functions, datatypes etc.
+
+
