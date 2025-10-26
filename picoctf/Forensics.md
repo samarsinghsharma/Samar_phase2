@@ -52,6 +52,7 @@ First we open the audio file in Audacity and enable "Spectogram view" instead of
 <img width="1920" height="1028" alt="Image" src="https://github.com/user-attachments/assets/9e00b3f7-6526-4ece-af8a-9d65ea024a84" />
 After analysis we find out that the audio contains SSTV (Slow-Scan TV) signals and we decode these signals using "RX-SSTV".
 We use the "Scottie 1" RX option to decode it and play the audio file. After the audio has finished, we get an image which contains the flag in plain text form (upside down).
+
 <img width="829" height="531" alt="Image" src="https://github.com/user-attachments/assets/d64cdb60-08b6-47c5-a725-d11bf7380ef3" />
 ## Flag:
 ```
