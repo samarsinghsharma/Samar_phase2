@@ -66,6 +66,7 @@ I initially uploaded the audio file into a "morse code decrypter", which was a w
 Even after uploading it on Audacity, I first compressed it, after not finding anything, I tried importing raw data but that was another wrong tangent.
 ## Resources:
 https://athletics.cmu.edu/athletics/mascot/index#:~:text=Although%20students%20have%20dressed%20as,as%20the%20university's%20first%20mascot.
+
 https://en.wikipedia.org/wiki/Apollo_TV_camera
 
 ***
