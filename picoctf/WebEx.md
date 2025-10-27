@@ -18,3 +18,5 @@ We also see that the default text on the search bar is "snickerdoodle".
 
 When we enter "snickerdoodle" in the search bar it takes us to another page as it is a valid entry (any entry will not take us to this page). When we inspect this page, we can see that the value of this cookie is "0".
 
+
+
