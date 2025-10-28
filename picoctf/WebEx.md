@@ -2,9 +2,22 @@
 
 # 1. Web Gauntlet 
 
+
 ***
 
 # 2. SSTI1
+## Solution:
+We first try to give different payloads as input in order to identify the template engine. We use the template expression "{{7*7}}". The template evaluates it as 49 instead of "7*7", this means that python code can be executed and that the template engine is "jinja2". We then test different payloads to bypass filters and find the flag, or the file which contains the flag. The command used to do this is: {{request.application.__globals__.__builtins__.__import__('os').popen('ls').read()}}. This basically lists all the files within the template (__pycache__ app.py flag requirements.txt). We then read the "flag" file using cat and get the flag.
+## Flag:
+```
+picoCTF{s4rv3r_s1d3_t3mp14t3_1nj3ct10n5_4r3_c001_dcdca99a}
+```
+## Concepts Learnt:
+Template engines take user input as data and process it and give output. There are some vulnerabilities which can be exploited by giving a certain payload as input which will make the template engine give an unexpected output (executing a code instead of just replacing placeholder with inputted value).
+## Resources:
+https://portswigger.net/web-security/server-side-template-injection
+https://onsecurity.io/article/server-side-template-injection-with-jinja2/
+https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Template%20Injection/README.md
 
 ***
 
