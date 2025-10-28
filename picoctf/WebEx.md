@@ -5,19 +5,29 @@
 Log in as admin http://shape-facility.picoctf.net:62800/ http://shape-facility.picoctf.net:62800/filter.php
 ## Solution:
 We find out from the hint that the vulnerability we need to exploit is an SQLite injection. In order to clear each round, we need to login using username (admin) and password. Since we do not know the password, we need to login just using the username, we do that by manipulating the SQL queries that the database makes.
+
 Round 1:
+
 We first try username as admin and password as a random word (SELECT * FROM users WHERE username='user' AND password='pass'), it shows us that it is invalid and also shows us the actual query being sent.
 So we manipulate the query such that it doesnt even check for the password by typing into username "admin'--" (this is equivalent to SELECT * FROM users WHERE username='admin' -- AND password='pass') . The -- is a comment, so anything after it doesnt get executed. So the query actually just checks the username and logs in and doesnt check the password.
+
 Round 2:
+
 In this round, the line comment "--" is filtered, so we will use the inline comment "/*...*/". This has the same function as --.
 So we type "admin'/*" as username and something random as password. This is equivalent to SELECT * FROM users WHERE username='admin'/* AND password='pass'.
 Round 3:
 We do the same thing in round 3 which we did in round 2 because no part of our user input is filtered.
+
 Round 4:
+
 In this round, the word "admin", which is the username is filtered. So we cannot directly put it as username. We use the concatenation operator "||" for this. We put "ad'||'min'/*" as user input which is equivalent to SELECT * FROM users WHERE username='ad'||'min'/* AND password='pass'. This operator is used to bypass filters because the word "admin" is filtered and the filter will let "ad||min" pass, but the database will evaluate the query as "admin" only.
+
 Round 5:
+
 We use the same input as round for because the only extra thing which is filtered in round 5 is the word "UNION", which is not relevant.
+
 Round 6:
+
 We have passed all the rounds and now the page asks us to check filter.php, where we find the flag.
 
 <img width="1920" height="979" alt="image" src="https://github.com/user-attachments/assets/05333521-1456-46c7-a82d-f30d074e4bc4" />
@@ -29,9 +39,13 @@ picoCTF{y0u_m4d3_1t_79a0ddc6}
 ## Concepts learnt:
 SQL injection (SQLi) is a web security vulnerability that allows an attacker to interfere with the queries that an application makes to its database. This can allow an attacker to view data that they are not normally able to retrieve. An attacker can modify or delete this data, causing persistent changes to the application's content or behavior.
 ## Resources:
+
 https://portswigger.net/web-security/sql-injection/cheat-sheet
+
 https://portswigger.net/support/sql-injection-bypassing-common-filters
+
 https://portswigger.net/web-security/sql-injection#retrieving-hidden-data
+
 https://www.invicti.com/blog/web-security/sql-injection-cheat-sheet/#LineCommentAttacks
 
 
