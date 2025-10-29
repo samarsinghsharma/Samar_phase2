@@ -41,6 +41,79 @@ https://gchq.github.io/CyberChef/#recipe=ROT13(true,true,false,13)&input=VkhGUlF
 > Description:
 > We found this file. Recover the flag.
 ## Solution:
+We first try to run the file to check what type of a file it is, but we find out that its corrupted. We then upload the file in a hex editor and analyse the encoding. We see that it starts with a BM. When a file starts with BM in hex it is a bitmap file (.bmp). We first change its name to "tunn3l_v1s10n.bmp" and try to open it but it doesnt open. We now open a sample bitmap image in the hex editor so that we can do side by side comparison of both the files. 
+
+<img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/1b47be94-86c3-4d35-ab1d-9fb36bbc7357" /> 
+
+There seems to be some characters in the header of the tunnel vision file which dont match with the sample image, so we make those codes matching with the sample and then try to open it. We finally get an image which says "not the flag". This means that the file is no longer corrupt.
+
+<img width="1139" height="311" alt="image" src="https://github.com/user-attachments/assets/b76accad-316d-414c-b224-f44fa7cebd4a" />
+
+We realise the image is not actually whole, and that its height has been reduced, so we run a command (exiftool tunn3l_v1s10n.bmp) to check the image height and width. We convert their decimal values to their hex and navigate to them on the hex editor. The height and width are in little endian format. We then keep changing the height and checking the image to find the full image which consists the flag. We need to find a value which does not exceed the maximum and is large enough at the same time. By further hit and trial, at around height value 830 (in decimal) the image is large enough for us to see the flag.
+
+<img width="1138" height="838" alt="image" src="https://github.com/user-attachments/assets/9081dd78-e46c-46f5-812d-f002d78732f1" />
+
+```
+root@DESKTOP-9PHI4CM:~# exiftool tunn3l_v1s10n
+Error: File not found - tunn3l_v1s10n
+root@DESKTOP-9PHI4CM:~# cd /mnt/d/user
+root@DESKTOP-9PHI4CM:/mnt/d/user# exiftool tunn3l_v1s10n
+ExifTool Version Number         : 12.40
+File Name                       : tunn3l_v1s10n
+Directory                       : .
+File Size                       : 2.8 MiB
+File Modification Date/Time     : 2025:10:26 19:29:32+05:30
+File Access Date/Time           : 2025:10:29 22:57:51+05:30
+File Inode Change Date/Time     : 2025:10:26 19:30:36+05:30
+File Permissions                : -rwxrwxrwx
+File Type                       : BMP
+File Type Extension             : bmp
+MIME Type                       : image/bmp
+BMP Version                     : Unknown (53434)
+Image Width                     : 1134
+Image Height                    : 306
+Planes                          : 1
+Bit Depth                       : 24
+Compression                     : None
+Image Length                    : 2893400
+Pixels Per Meter X              : 5669
+Pixels Per Meter Y              : 5669
+Num Colors                      : Use BitDepth
+Num Important Colors            : All
+Red Mask                        : 0x27171a23
+Green Mask                      : 0x20291b1e
+Blue Mask                       : 0x1e212a1d
+Alpha Mask                      : 0x311a1d26
+Color Space                     : Unknown (,5%()
+Rendering Intent                : Unknown (826103054)
+Image Size                      : 1134x306
+Megapixels                      : 0.347
+root@DESKTOP-9PHI4CM:/mnt/d/user# python3
+Python 3.10.12 (main, Aug 15 2025, 14:32:43) [GCC 11.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> hex(800)
+'0x320'
+>>> hex(850)
+'0x352'
+>>> hex(820)
+'0x334'
+>>> hex(820)
+'0x334'
+>>> hex(840)
+'0x348'
+>>> hex(830)
+'0x33e'
+```
+## Flag:
+```
+picoCTF{qu1t3_a_v13w_2020}
+```
+## Concepts learnt:
+I learnt how to use the hex editor properly. I also learnt a little about bmp files and how to do little endian formatting. I learnt about the exiftool as well.
+## Resources:
+https://ctf101.org/forensics/what-is-a-hex-editor/
+https://ctf101.org/forensics/what-is-a-hex-editor/
+
 
 ***
 
