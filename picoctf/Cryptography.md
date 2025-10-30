@@ -73,8 +73,14 @@ I learnt about the RSA algorithm, encryption and decryption, and the mathematica
 https://crypto.stackexchange.com/questions/24880/how-multiplicative-property-of-rsa-can-be-exploited
 https://en.wikipedia.org/wiki/RSA_cryptosystem
 
+***
+
 
 # 2. custom encryption
+> Description: Can you get sense of this code file and write the function that will decode the given encrypted file content.
+Find the encrypted file here flag_info and code file might be good to analyze and get the flag.
+## Solution:
+
 
 
 # 3. miniRSA
