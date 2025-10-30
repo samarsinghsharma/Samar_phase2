@@ -11,7 +11,7 @@ We know that the encrypter takes input, raises it to the power e and then mod n 
 ```
 Then we send that as input for decryption. This will basically be the decryption of (2m)^e mod n. We will then divide the resultant output by the number (2) to get the password. We need to convert the integer password to bytes and then to ascii.
 ```
-sid@sidsAsusZenbook:~$ { printf 'e\n'; sleep 3; echo -e '\x02\n'; } | nc titan.picoctf.net 54898
+sam@samslaptop:~$ { printf 'e\n'; sleep 3; echo -e '\x02\n'; } | nc titan.picoctf.net 54898
 *****************************************
 ***************THE ORACLE**************
 *****************************************
@@ -25,8 +25,8 @@ ciphertext (m ^ e mod n) 5067313465613043651275429665315895824157755779222372979
 
 what should we do for you? 
 E --> encrypt D --> decrypt. 
-sid@sidsAsusZenbook:~$ ^C
-sid@sidsAsusZenbook:~$ nc titan.picoctf.net 54898
+sam@samslaptop:~$ ^C
+sam@samslaptop:~$ nc titan.picoctf.net 54898
 *****************************************
 ***************THE ORACLE**************
 *****************************************
@@ -36,7 +36,7 @@ d
 Enter text to decrypt: 8283377309369758183523145573200750782484310290735315558059488823972896636253855296781020106079552858693546617489082932997730796347166223270632814660216969565981265960585467439881131219657789014058412904318589178439314193411103546217783791481965173915838239819656233269969451945419284153208337289812023220310
 decrypted ciphertext as hex (c ^ d mod n): 68726a6aca
 decrypted ciphertext: hrjjÊ
-sid@sidsAsusZenbook:~$ python3
+sam@samslaptop:~$ python3
 Python 3.12.3 (main, Aug 14 2025, 17:47:21) [GCC 13.3.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>> m = 1634668422544022562287275254811184478161245548888973650857381112077711852144181630709254123963471597994127621183174673720047559236204808750789430675058597
