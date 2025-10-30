@@ -5,7 +5,74 @@
 An attacker was able to intercept communications between a bank and a fintech company. They managed to get the message (ciphertext) and the password that was used to encrypt the message.
 After some intensive reconassainance they found out that the bank has an oracle that was used to encrypt the password and can be found here nc titan.picoctf.net 52557. Decrypt the password and use it to decrypt the message. The oracle can decrypt anything except the password.
 ## Solution:
-We know that the encrypter takes inpput, raises it to the power e and then mod n (m^e mod n). In order to decrypt the password, we will multiply the password with another number (2 in this case) and send that as input for decryption. This will basically be (2m)^e mod n. We will then divide the resultant output by the number (2) to get the password. 
+We know that the encrypter takes input, raises it to the power e and then mod n (m^e mod n). In order to decrypt the password, we will multiply the password with the encrypted string of another number (2 in this case).
+```
+{ printf 'e\n'; sleep 3; echo -e '\x02\n'; } | nc titan.picoctf.net 54898
+```
+Then we send that as input for decryption. This will basically be the decryption of (2m)^e mod n. We will then divide the resultant output by the number (2) to get the password. We need to convert the integer password to bytes and then to ascii.
+```
+sid@sidsAsusZenbook:~$ { printf 'e\n'; sleep 3; echo -e '\x02\n'; } | nc titan.picoctf.net 54898
+*****************************************
+***************THE ORACLE**************
+*****************************************
+what should we do for you? 
+E --> encrypt D --> decrypt. 
+enter text to encrypt (encoded length must be less than keysize): 
+
+encoded cleartext as Hex m: 2
+
+ciphertext (m ^ e mod n) 5067313465613043651275429665315895824157755779222372979446076012356324498190828210335763979330272318657269048435311897896433721115606764442199497891219230
+
+what should we do for you? 
+E --> encrypt D --> decrypt. 
+sid@sidsAsusZenbook:~$ ^C
+sid@sidsAsusZenbook:~$ nc titan.picoctf.net 54898
+*****************************************
+***************THE ORACLE**************
+*****************************************
+what should we do for you? 
+E --> encrypt D --> decrypt. 
+d
+Enter text to decrypt: 8283377309369758183523145573200750782484310290735315558059488823972896636253855296781020106079552858693546617489082932997730796347166223270632814660216969565981265960585467439881131219657789014058412904318589178439314193411103546217783791481965173915838239819656233269969451945419284153208337289812023220310
+decrypted ciphertext as hex (c ^ d mod n): 68726a6aca
+decrypted ciphertext: hrjjÊ
+sid@sidsAsusZenbook:~$ python3
+Python 3.12.3 (main, Aug 14 2025, 17:47:21) [GCC 13.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> m = 1634668422544022562287275254811184478161245548888973650857381112077711852144181630709254123963471597994127621183174673720047559236204808750789430675058597
+>>> encrypt_of_2 = 5067313465613043651275429665315895824157755779222372979446076012356324498190828210335763979330272318657269048435311897896433721115606764442199497891219230
+>>> m*encrypt_of_2
+8283377309369758183523145573200750782484310290735315558059488823972896636253855296781020106079552858693546617489082932997730796347166223270632814660216969565981265960585467439881131219657789014058412904318589178439314193411103546217783791481965173915838239819656233269969451945419284153208337289812023220310
+>>> int('68726a6aca',16)
+448596175562
+>>> 448596175562//2
+224298087781
+>>>
+>>> hex(224298087781)
+'0x3439353565'
+>>> bytes.fromhex('3439353565').decode()
+'4955e'
+>>>
+
+```
+After that we decrypt the secret message using the ascii password which we get. We do this using "openssl enc -aes-256-cbc -d ...".
+```
+openssl enc -aes-256-cbc -d -in secret.enc 
+enter AES-256-CBC decryption password:
+*** WARNING : deprecated key derivation used.
+Using -iter or -pbkdf2 would be better.
+picoCTF{su((3ss_(r@ck1ng_r3@_4955eb5d}
+```
+## Flag:
+```
+picoCTF{su((3ss_(r@ck1ng_r3@_4955eb5d}
+```
+## Concepts Learnt:
+I learnt about the RSA algorithm, encryption and decryption, and the mathematical concepts behind it which helped in solving the challenge by exploiting the vulnerability.
+## Resources:
+https://crypto.stackexchange.com/questions/24880/how-multiplicative-property-of-rsa-can-be-exploited
+https://en.wikipedia.org/wiki/RSA_cryptosystem
+
 
 # 2. custom encryption
 
