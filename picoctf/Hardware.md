@@ -53,5 +53,56 @@ https://www.youtube.com/watch?v=Ak9R4yxQPhs
 # 3. Bare Metal Alchemist
 > Description:my friend recommended me this anime but i think i've heard a wrong name.
 ## Solution:
+We initally run the `file` command to understand a bit more about the .elf file.
+We then try to decompile using `avr-gdb` but that supposedly does not support the architecture of the given file. So, we use Ghidra GUI instead.
+We open the main function from the symbol tree and open the decompiled version which looked similar to C with weird variable names. There were a lot of memory address which were tough to go about.
+Also, the function `z1()` was being called again and again, on reading it in Ghidra and doing some digging, We find that it was replacing certain bytes, ie, masking it.
+Going further down the main function, We find that the code was reading bytes from a memory address, `0x68`, and then was XORing it with `0xA5`. Also, the loop was being broken if the current byte was the key, `0xA5`, or 0.
+- The exact XOR loop:
+  ```
+  R15R14 = 0x68;
+  R16 = 0;
+  while( true ) {
+         Z = (byte *)R15R14;
+         R25R24._0_1_ = *(byte *)(uint3)R15R14;
+         if ((byte)R25R24 == 0) break;
+         Z._1_1_ = (undefined1)(R15R14 >> 8);
+         Z._0_1_ = (byte)R25R24 ^ R11;
+         if ((byte)R25R24 == 0xa5) break;
+         R25R24._0_1_ = DAT_mem_0029;
+         R25R24._0_1_ = (byte)R25R24 ^ (byte)R25R24 * '\x02';
+         if (((byte)R25R24 & 4) == 0) {
+               auStack_7 = (undefined1  [3])0x131;
+               z1();
+               break;
+         }
+  ```
+Then, We go to the memory location `0x68`, take a few bytes from there and convert to ascii but nothing meaningful shows up.
+Then we go to `0x0068` and find the hex there as
+  ```
+  f1 e3 e6 e6 f1 e3 de f1 cd 94 d6 fa 94 d6 fa d6 ca c8 96 fa d6 94 c8 d5 c9 96 fa 91 d7 c1 d0 94 cb ca fa c3 94 d7 c8 d2 91 d7 c0 d8
+  ```
+XORing each byte with `0xA5` we get,
+  ```
+  54 46 43 43 54 46 7b 54 68 31 73 5f 31 73 5f 73 6f 6d 33 5f 73 31 6d 70 6c 33 5f 34 72 64 75 31 6e 6f 5f 66 31 72 6d 77 34 72 65 7d
+  ```
+Converting these decoded bytes to ASCII, we finally get,
+  `TFCCTF{Th1s_1s_som3_s1mpl3_4rdu1no_f1rmw4re}`
+
+## Flag:
+
+```
+TFCCTF{Th1s_1s_som3_s1mpl3_4rdu1no_f1rmw4re}
+```
+
+## Concepts learnt:
+
+I learnt how to use Ghidra and analyse the assembly code, I also learnt about xor function and its uses. I learnt about data bytes location as well.
+
+## Resources:
+
+https://www.youtube.com/watch?v=OWEZQMVLMPs
+https://onlinetools.com/ascii/convert-bytes-to-ascii
+https://xor.pw/
 
 
