@@ -46,6 +46,7 @@ I learnt about "logic 2 capture" and "Async Serial".
 ## Notes:
 ## Resources:
 https://discuss.saleae.com/t/logic-2-capture-format-sal/1858
+
 https://www.youtube.com/watch?v=Ak9R4yxQPhs
 
 ***
@@ -102,7 +103,9 @@ I learnt how to use Ghidra and analyse the assembly code, I also learnt about xo
 ## Resources:
 
 https://www.youtube.com/watch?v=OWEZQMVLMPs
+
 https://onlinetools.com/ascii/convert-bytes-to-ascii
+
 https://xor.pw/
 
 
