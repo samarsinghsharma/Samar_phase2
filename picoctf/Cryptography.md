@@ -80,9 +80,95 @@ https://en.wikipedia.org/wiki/RSA_cryptosystem
 > Description: Can you get sense of this code file and write the function that will decode the given encrypted file content.
 Find the encrypted file here flag_info and code file might be good to analyze and get the flag.
 ## Solution:
-We analyse the code and figure out the decryption algorithm by analysing the dynamic_xor_encrypt function. We then right a python script which 
+We analyse the code and figure out the decryption algorithm by analysing the dynamic_xor_encrypt function. We then right a python script which doest the opposite of the given code, basically decryption.
+```
+def generator(g, x, p):
+    return pow(g, x) % p
+
+def dynamic_xor_encrypt(plaintext, text_key):
+    cipher_text = ""
+    key_length = len(text_key)
+    k = ""
+    for i, char in enumerate(plaintext[::-1]):
+        key_char = text_key[i % key_length]
+        k += key_char 
+        encrypted_char = chr(ord(char) ^ ord(key_char))
+        cipher_text += encrypted_char
+    print(k)
+    return cipher_text
 
 
+p=97
+g=31
+a=95
+b=21
+cipher = [237915, 1850450, 1850450, 158610, 2458455, 2273410, 1744710, 1744710, 1797580, 1110270, 0, 2194105, 555135, 132175, 1797580, 0, 581570, 2273410, 26435, 1638970, 634440, 713745, 158610, 158610, 449395, 158610, 687310, 1348185, 845920, 1295315, 687310, 185045, 317220, 449395]
+
+v = generator(g, b, p)
+key = generator(v, a, p)
+
+decipher = ""
+
+for c in cipher:
+    decipher += chr(c // 311 // key)
+
+print(dynamic_xor_encrypt(decipher, "picoCTF{"))
+```
+Output of this code:
+```
+picoCTF{picoCTF{picoCTF{picoCTF{pi
+aedurtuavxeiXLxz&⌂c+FA§{Z-!-§   @=6`
+```
+This code gives us the scrambled "trudeau" which is "aedurtu".
+We then make a small change in the code
+```
+def generator(g, x, p):
+    return pow(g, x) % p
+
+def dynamic_xor_encrypt(plaintext, text_key):
+    cipher_text = ""
+    key_length = len(text_key)
+    k = ""
+    for i, char in enumerate(plaintext[::-1]):
+        key_char = text_key[i % key_length]
+        k += key_char 
+        encrypted_char = chr(ord(char) ^ ord(key_char))
+        cipher_text += encrypted_char
+    print(k)
+    return cipher_text
+
+
+p=97
+g=31
+a=95
+b=21
+cipher = [237915, 1850450, 1850450, 158610, 2458455, 2273410, 1744710, 1744710, 1797580, 1110270, 0, 2194105, 555135, 132175, 1797580, 0, 581570, 2273410, 26435, 1638970, 634440, 713745, 158610, 158610, 449395, 158610, 687310, 1348185, 845920, 1295315, 687310, 185045, 317220, 449395]
+
+v = generator(g, b, p)
+key = generator(v, a, p)
+
+decipher = ""
+
+for c in cipher:
+    decipher += chr(c // 311 // key)
+
+print(dynamic_xor_encrypt(decipher, "aedurtu"))
+```
+Output:
+```
+aedurtuaedurtuaedurtuaedurtuaedurt
+picoCTF{custom_d2cr0pt6d_66778b34}
+```
+## Flag: 
+```
+picoCTF{custom_d2cr0pt6d_66778b34}
+```
+## Concepts Learnt:
+XOR, if a ^ b = c, then c ^ b = a
+## Resources
+https://www.geeksforgeeks.org/dsa/xor-cipher/
+
+***
 
 # 3. miniRSA
 >Description: Let's decrypt this: ciphertext? Something seems a bit small.
