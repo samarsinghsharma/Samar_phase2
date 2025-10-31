@@ -32,7 +32,8 @@ sam@samslaptop:~/cryptoTP/iLikeLogic$
 ```
 We do some research on "SALAE" and find a softwear called "Logic 2" and install it. We then open the .sal file in Logic 2 and start adding each analyser till we get something readable. By hit and trial we find that Async Serial is the correct analyser. We select the Input channel as 3 as it was the only one showing something significant and we get story-type text in the Data box. We then find the flag hidden between the lines of the story.
 
-<img width="3830" height="2195" alt="image" src="https://github.com/user-attachments/assets/89afc657 -eccd-474d-911f-ce42b7322505" />
+<img width="1264" height="722" alt="image" src="https://github.com/user-attachments/assets/32eae976-4dba-455e-bc52-464f1132b439" />
+
 
 ## Flag:
 
