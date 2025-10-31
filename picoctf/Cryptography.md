@@ -159,6 +159,7 @@ Output:
 aedurtuaedurtuaedurtuaedurtuaedurt
 picoCTF{custom_d2cr0pt6d_66778b34}
 ```
+So what this code basically does is, it reverses the xor encryption function such that if we give it a part our desired result ( part of the flag: picoCTF{) as an argument for the function, it will split it across the cipher text and derive the key for us. This key is just a scrambled version of "trudeau" according to the original code. Now we have got the key so we put the key as argument, then the function will return to us the actual full decrypted flag.
 ## Flag: 
 ```
 picoCTF{custom_d2cr0pt6d_66778b34}
