@@ -112,6 +112,7 @@ picoCTF{qu1t3_a_v13w_2020}
 I learnt how to use the hex editor properly. I also learnt a little about bmp files and how to do little endian formatting. I learnt about the exiftool as well.
 ## Resources:
 https://ctf101.org/forensics/what-is-a-hex-editor/
+
 https://ctf101.org/forensics/what-is-a-hex-editor/
 
 
