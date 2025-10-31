@@ -51,5 +51,7 @@ https://www.youtube.com/watch?v=Ak9R4yxQPhs
 ***
 
 # 3. Bare Metal Alchemist
-> Description:
+> Description:my friend recommended me this anime but i think i've heard a wrong name.
+## Solution:
+
 
