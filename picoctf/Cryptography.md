@@ -165,7 +165,7 @@ So what this code basically does is, it reverses the xor encryption function suc
 picoCTF{custom_d2cr0pt6d_66778b34}
 ```
 ## Concepts Learnt:
-XOR, if a ^ b = c, then c ^ b = a
+I learn about the functioning of XOR, if a ^ b = c, then c ^ b = a.
 ## Resources
 https://www.geeksforgeeks.org/dsa/xor-cipher/
 
