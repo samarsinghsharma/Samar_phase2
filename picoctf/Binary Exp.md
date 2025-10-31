@@ -76,6 +76,7 @@ I learnt that we can manipulate the source code into giving our desired output b
 I also learnt that if there are more format specifiers than there are function arguments to fill its place, printf() will just print the next value on the stack (for whichever format specifier's argument is not given).
 ## Resources:
 https://medium.com/swlh/binary-exploitation-format-string-vulnerabilities-70edd501c5be
+
 https://ctf101.org/binary-exploitation/what-is-a-format-string-vulnerability/
 
 ***
@@ -128,6 +129,7 @@ picoCTF{c0ntr0ll3d_clutt3r_1n_my_buff3r}
 The same as the previous challenges, about stack, buffer overflow. I also learnt how to write something in little endian format. I learnt how to find out the overflow point by calculating the distance between clutter and code by seeing the disassembled code.
 ## Resources:
 https://ctf101.org/binary-exploitation/buffer-overflow/
+
 https://www.reddit.com/r/ExploitDev/comments/ffuvg6/calculating_the_offset/
 
 
