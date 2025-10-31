@@ -45,4 +45,10 @@ I learnt about "logic 2 capture" and "Async Serial".
 ## Notes:
 ## Resources:
 https://discuss.saleae.com/t/logic-2-capture-format-sal/1858
+https://www.youtube.com/watch?v=Ak9R4yxQPhs
+
+***
+
+# 3. Bare Metal Alchemist
+> Description:
 
