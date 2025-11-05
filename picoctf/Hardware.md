@@ -23,7 +23,7 @@ https://www.rapidtables.com/convert/number/decimal-to-binary.html
 # 2. I like logic
 > Description: i like logic and i like files, apparently, they have something in common, what should my next step be.
 ## Solution:
-- Ran `strings digital-x.bin` on every file and found the same output in each other than digital-3.bin which had some additional stuff that didn't make sense.
+We first run `strings digital-x.bin` on every file and find the same output in each other than digital-3.bin which had some additional stuff that didn't make sense.
 ```
 sam@samslaptop:~/cryptoTP/iLikeLogic$ strings digital-0.bin 
 <SALEAE>
